@@ -1,0 +1,6 @@
+{
+  "name": "TASKFLOW — Editorial Personal Productivity & Focus Workspace",
+  "description": "A production-grade personal productivity, task organization, calendar planning, Pomodoro focus, and analytics workspace backed by PostgreSQL.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

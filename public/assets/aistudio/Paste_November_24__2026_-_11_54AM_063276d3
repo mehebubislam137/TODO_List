@@ -1,0 +1,1872 @@
+# TASKFLOW
+## COMPLETE FULL-STACK APPLICATION DEVELOPMENT SPECIFICATION
+
+### ROLE
+
+Act as a complete professional software development team consisting of:
+
+- Senior Software Architect
+- Senior React.js Developer
+- Senior Node.js Backend Developer
+- PostgreSQL Database Architect
+- Supabase Specialist
+- Cybersecurity Engineer
+- UI/UX Design Director
+- Product Designer
+- Motion Designer
+- Quality Assurance Engineer
+- Performance Optimization Engineer
+
+Your responsibility is to design, develop, test, and refine a complete production-minded web application named TASKFLOW.
+
+Do not build merely a visual prototype.
+
+Build a genuinely functional, responsive, database-connected personal productivity application.
+
+The final application must have a distinctive visual identity, reliable functionality, clean architecture, and a polished user experience.
+
+---
+
+# 1. PROJECT OVERVIEW
+
+Project Name: TASKFLOW
+
+Project Category: Personal Productivity and Task Management Application.
+
+TASKFLOW is a modern personal productivity workspace designed to help users organize tasks, manage deadlines, prioritize responsibilities, track productivity, and maintain focused working sessions.
+
+It must go beyond conventional TODO applications.
+
+The application should combine:
+
+1. Task management.
+2. Task organization.
+3. Deadline management.
+4. Calendar-based planning.
+5. Productivity analytics.
+6. Focus sessions.
+7. Pomodoro timer.
+8. Activity tracking.
+9. Smart task creation.
+10. Efficient navigation.
+
+The application must feel like a professionally developed productivity product, not a generic AI-generated dashboard or basic academic CRUD project.
+
+## Primary objectives
+
+- Simplify personal task management.
+- Make task organization efficient.
+- Improve deadline awareness.
+- Help users prioritize responsibilities.
+- Provide meaningful productivity insights.
+- Encourage focused working sessions.
+- Maintain reliable data persistence.
+- Provide an exceptional user experience.
+
+---
+
+# 2. MANDATORY TECHNOLOGY STACK
+
+Use the following technologies.
+
+| Layer | Technology |
+|---|---|
+| Frontend | React.js |
+| Programming language | JavaScript |
+| Backend | Node.js |
+| Backend framework | Express.js |
+| Database | Supabase PostgreSQL |
+| Database client | Supabase JavaScript Client |
+| API communication | REST API |
+| Styling | Custom CSS |
+| Animations | CSS transitions and animations |
+| Version control | Git and GitHub |
+
+STRICT REQUIREMENTS:
+
+- Do not replace React.js.
+- Do not replace Node.js.
+- Do not replace Supabase.
+- Do not replace PostgreSQL.
+- Do not convert the application to TypeScript.
+- Do not introduce an alternative database.
+- Do not use localStorage as the primary database.
+- Do not introduce unnecessary dependencies.
+- Do not expose privileged database credentials.
+
+Tailwind CSS and Framer Motion are not required. Prefer a well-organized custom CSS architecture.
+
+Additional dependencies may be introduced only when they provide meaningful functionality.
+
+---
+
+# 3. APPLICATION ACCESS ARCHITECTURE
+
+## Critical requirement: No login or registration interface.
+
+Do not create:
+
+- Login screen.
+- Registration screen.
+- Signup screen.
+- Authentication landing page.
+- Account creation form.
+
+The application must open directly into its main workspace.
+
+## Authentication implementation
+
+Use Supabase Anonymous Authentication.
+
+Expected workflow:
+
+1. User opens TASKFLOW.
+2. Application checks whether an existing Supabase session exists.
+3. If a valid session exists, restore it.
+4. Otherwise, automatically create an anonymous Supabase user.
+5. Initialize the personal workspace.
+6. Retrieve the user's preferences and categories.
+7. Load the dashboard.
+
+The process must happen without displaying an authentication screen.
+
+Every anonymous user must receive an independent user identity.
+
+All personal records must be associated with the authenticated Supabase user ID.
+
+Use Supabase RLS to isolate individual workspaces.
+
+Do not use a shared public database workspace.
+
+Do not pretend that a browser-generated identifier provides secure authentication.
+
+Implement proper session handling and document anonymous-account recovery limitations.
+
+---
+
+# 4. COMPLETE APPLICATION NAVIGATION
+
+Create the following primary navigation structure.
+
+TASKFLOW
+│
+├── Dashboard
+│
+├── My Tasks
+│   ├── All Tasks
+│   ├── Today
+│   ├── Upcoming
+│   ├── In Progress
+│   ├── Completed
+│   ├── Important
+│   ├── Overdue
+│   └── Recently Deleted
+│
+├── Categories
+│
+├── Calendar
+│
+├── Focus Mode
+│
+├── Analytics
+│
+├── Archived Tasks
+│
+└── Settings
+
+The navigation should be intuitive and compact.
+
+Do not make every navigation item visually identical.
+
+Provide clear active states and smooth navigation transitions.
+
+On mobile devices, transform the desktop navigation into an appropriate compact navigation experience.
+
+---
+
+# 5. COMPLETE SCREEN SPECIFICATIONS
+
+## 5.1 DASHBOARD
+
+The dashboard is the main application workspace.
+
+It should communicate useful information immediately without overwhelming the user.
+
+### Header
+
+Display:
+
+- Greeting.
+- Current date.
+- Brief daily summary.
+- Quick Add button.
+- Search access.
+- Notification indicator, if notifications are enabled.
+- Profile/workspace indicator without an account-management screen.
+
+### Productivity overview
+
+Display:
+
+- Total active tasks.
+- Completed tasks.
+- Pending tasks.
+- In-progress tasks.
+- Overdue tasks.
+- Completion percentage.
+
+Avoid creating six identical statistic cards.
+
+Use thoughtful visual composition, typography, and contextual data visualization.
+
+### Today's overview
+
+Display:
+
+- Today's tasks.
+- Completed tasks.
+- Remaining tasks.
+- Daily completion progress.
+- High-priority tasks.
+
+### Upcoming deadlines
+
+Display approaching deadlines in chronological order.
+
+Make overdue tasks visually distinguishable.
+
+### Daily briefing
+
+Generate a concise rule-based summary using actual task data.
+
+Examples:
+
+- Three tasks are scheduled for today.
+- One important deadline is approaching.
+- Two tasks are overdue.
+- You have completed four tasks today.
+
+Do not invent productivity information.
+
+### Recent activity
+
+Display the latest task activities chronologically.
+
+### Productivity visualization
+
+Display useful weekly progress information.
+
+Charts must use actual database records.
+
+---
+
+## 5.2 MY TASKS
+
+Create a centralized task management workspace.
+
+### Main functionalities
+
+- Display all active tasks.
+- Create tasks.
+- Edit tasks.
+- Delete tasks.
+- Duplicate tasks.
+- Complete tasks.
+- Change task status.
+- Change priority.
+- Change category.
+- Archive tasks.
+- Restore tasks.
+- Search tasks.
+- Filter tasks.
+- Sort tasks.
+- Select multiple tasks.
+- Perform bulk operations.
+
+### Viewing modes
+
+Provide:
+
+1. List View.
+2. Grid View.
+
+If practical, also provide a Kanban-style board grouped by status.
+
+The interface must remain efficient even when the user has hundreds of tasks.
+
+### Task representation
+
+Each task should display relevant information:
+
+- Title.
+- Description preview.
+- Priority.
+- Status.
+- Category.
+- Due date.
+- Important indicator.
+- Subtask progress.
+
+Avoid excessive visual decorations.
+
+---
+
+## 5.3 TASK CREATION AND EDITING
+
+Create a refined task creation interface.
+
+Support:
+
+- Task title.
+- Description.
+- Priority.
+- Status.
+- Category.
+- Tags.
+- Start date.
+- Due date.
+- Optional due time.
+- Important indicator.
+- Subtasks.
+- Recurrence settings where applicable.
+
+### Validation
+
+- Title is mandatory.
+- Title must not be empty or whitespace.
+- Apply sensible title and description length limits.
+- Validate dates.
+- Prevent invalid date ranges.
+- Validate category ownership.
+- Validate priority and status values.
+
+Provide understandable error messages.
+
+Support editing existing tasks without losing unchanged information.
+
+---
+
+## 5.4 TODAY
+
+Display tasks relevant to the current local date.
+
+Sections:
+
+- Overdue.
+- Today's high-priority tasks.
+- Today's remaining tasks.
+- Completed today.
+
+Include:
+
+- Daily completion progress.
+- Quick task creation.
+- Priority indicators.
+- Deadline information.
+
+Use the user's configured timezone.
+
+---
+
+## 5.5 UPCOMING
+
+Organize future tasks into:
+
+- Tomorrow.
+- This week.
+- Next week.
+- Later.
+
+Sort tasks chronologically.
+
+Display approaching deadlines clearly.
+
+Do not include completed or archived tasks in active upcoming lists.
+
+---
+
+## 5.6 COMPLETED
+
+Display completed tasks.
+
+Support:
+
+- Search.
+- Filtering.
+- Sorting.
+- Restoration to active tasks.
+- Editing.
+- Permanent deletion.
+
+Show completion dates.
+
+Do not automatically delete completed tasks.
+
+---
+
+## 5.7 IMPORTANT
+
+Display tasks explicitly marked important.
+
+High priority and importance must be separate concepts.
+
+A high-priority task is not automatically important unless the user marks it important.
+
+---
+
+## 5.8 OVERDUE
+
+Identify tasks whose deadlines have passed and that are not completed or archived.
+
+Overdue must be calculated from due date and task status.
+
+Do not store overdue as an independent task status.
+
+---
+
+## 5.9 CATEGORIES
+
+Provide category management.
+
+Initial default categories:
+
+- Personal.
+- College.
+- Work.
+- Shopping.
+- Health.
+- Projects.
+- Others.
+
+Allow users to:
+
+- Create categories.
+- Rename categories.
+- Change category colors.
+- Edit categories.
+- Delete categories.
+
+Each task can belong to one category or no category.
+
+Deleting a category must not delete its associated tasks.
+
+When deleting a category, allow the user to move its tasks to another category or leave them uncategorized.
+
+Protect default categories from accidental permanent deletion where appropriate.
+
+---
+
+## 5.10 CALENDAR
+
+Create an interactive calendar.
+
+Views:
+
+- Monthly.
+- Weekly.
+- Daily.
+
+Features:
+
+- Display tasks on their scheduled dates.
+- Navigate between dates.
+- Select a date.
+- View tasks for the selected date.
+- Create tasks from a selected date.
+- Edit tasks.
+- Change task deadlines.
+- Display task priorities.
+- Distinguish completed and overdue tasks.
+
+Implement responsive calendar layouts.
+
+If drag-and-drop rescheduling is supported, persist changes to the database.
+
+---
+
+## 5.11 ARCHIVED TASKS
+
+Archived tasks should be hidden from normal active task views.
+
+Allow:
+
+- Viewing archived tasks.
+- Restoring tasks.
+- Permanently deleting tasks.
+
+Archiving must never mean deleting.
+
+---
+
+## 5.12 RECENTLY DELETED
+
+Implement a recoverable trash system.
+
+When a user deletes a task:
+
+- Mark it as deleted.
+- Preserve its data.
+- Record deletion time.
+- Remove it from normal active views.
+
+Allow:
+
+- Restore.
+- Permanently delete.
+- Empty trash.
+
+Permanent deletion must require confirmation.
+
+Subtask deletion and restoration must respect parent-child relationships.
+
+---
+
+## 5.13 SETTINGS
+
+Create settings sections for:
+
+### Appearance
+
+- Dark theme.
+- Light theme.
+- System theme.
+
+### Task preferences
+
+- Default priority.
+- Default task view.
+- Default category.
+- Week-start preference.
+
+### Calendar
+
+- Calendar view preference.
+- Timezone preference.
+
+### Focus
+
+- Work duration.
+- Short break duration.
+- Long break duration.
+- Sessions before long break.
+- Sound preference.
+
+### Productivity
+
+- Daily task target.
+- Daily focus-time goal.
+
+### Keyboard shortcuts
+
+Display available shortcuts.
+
+### Data management
+
+- Export tasks.
+- Export workspace data.
+- Download backup.
+- Display workspace information.
+- Explain anonymous workspace recovery limitations.
+
+Persist preferences in Supabase.
+
+---
+
+# 6. ADVANCED TASK MANAGEMENT
+
+## 6.1 Task properties
+
+Use the following task properties.
+
+| Field | Purpose |
+|---|---|
+| id | UUID |
+| user_id | Workspace owner |
+| title | Task title |
+| description | Task details |
+| priority | Low, Medium, High |
+| status | Pending, In Progress, Completed |
+| category_id | Optional category |
+| start_date | Optional start date |
+| due_date | Optional deadline |
+| due_time | Optional deadline time |
+| is_important | Importance indicator |
+| is_archived | Archive indicator |
+| deleted_at | Soft deletion timestamp |
+| created_at | Creation timestamp |
+| updated_at | Modification timestamp |
+| completed_at | Completion timestamp |
+
+Use appropriate database types and constraints.
+
+## 6.2 Subtasks
+
+Allow users to divide large tasks into smaller tasks.
+
+Support:
+
+- Creating subtasks.
+- Editing subtasks.
+- Completing subtasks.
+- Deleting subtasks.
+- Displaying parent task progress.
+
+Show completion progress such as 3/5 completed.
+
+Subtasks should inherit the ownership of their parent task.
+
+## 6.3 Task tags
+
+Support multiple tags per task.
+
+Allow:
+
+- Creating tags.
+- Applying tags.
+- Removing tags.
+- Searching by tags.
+- Filtering by tags.
+
+Avoid duplicating category functionality.
+
+Categories represent primary classification; tags represent flexible labels.
+
+## 6.4 Recurring tasks
+
+Support:
+
+- Daily.
+- Weekly.
+- Monthly.
+- Custom interval where practical.
+
+Generate new task instances according to recurrence settings.
+
+Do not repeatedly recreate completed instances.
+
+Preserve historical task completion records.
+
+## 6.5 Search
+
+Support searching by:
+
+- Title.
+- Description.
+- Category.
+- Tags.
+
+Use debounced search.
+
+Search should work across active tasks.
+
+## 6.6 Filters
+
+Support combined filters:
+
+- Status.
+- Priority.
+- Category.
+- Tags.
+- Date range.
+- Important.
+- Completed.
+- Archived.
+
+## 6.7 Sorting
+
+Support:
+
+- Newest first.
+- Oldest first.
+- Due date.
+- Priority.
+- Alphabetical order.
+- Recently updated.
+
+## 6.8 Bulk operations
+
+Allow users to select multiple tasks and:
+
+- Complete.
+- Change status.
+- Change priority.
+- Change category.
+- Archive.
+- Delete.
+
+Use transactional or otherwise atomic database operations where possible.
+
+Do not leave the UI in a misleading partially updated state if an operation fails.
+
+---
+
+# 7. PRODUCTIVITY SYSTEM
+
+## 7.1 FOCUS MODE
+
+Create a dedicated distraction-free interface.
+
+When activated:
+
+- Display the selected task.
+- Show task title.
+- Show description.
+- Display the timer.
+- Show elapsed time.
+- Show remaining time.
+- Provide pause and resume.
+- Provide session completion.
+- Provide exit functionality.
+
+Use a distinct visual composition from the main dashboard.
+
+## 7.2 POMODORO TIMER
+
+Default configuration:
+
+- Work: 25 minutes.
+- Short break: 5 minutes.
+- Long break: 15 minutes.
+- Long break after four completed work sessions.
+
+Allow configuration through Settings.
+
+Support:
+
+- Start.
+- Pause.
+- Resume.
+- Reset.
+- Skip break.
+- Complete session.
+
+Use timestamps rather than relying entirely on JavaScript setInterval for timer accuracy.
+
+Handle browser tab suspension and page reloads gracefully.
+
+Persist completed focus sessions.
+
+## 7.3 FOCUS SESSION HISTORY
+
+Store:
+
+- Session ID.
+- User ID.
+- Associated task.
+- Session type.
+- Planned duration.
+- Actual duration.
+- Start timestamp.
+- End timestamp.
+- Completion status.
+
+Display:
+
+- Total focus time.
+- Sessions completed.
+- Daily focus time.
+- Weekly focus time.
+
+## 7.4 DAILY PROGRESS
+
+Display:
+
+- Tasks completed today.
+- Tasks remaining.
+- Completion percentage.
+- Daily task target.
+
+## 7.5 PRODUCTIVITY ANALYTICS
+
+Provide:
+
+- Daily task completion.
+- Weekly completion.
+- Monthly completion.
+- Focus-time trends.
+- Category distribution.
+- Priority distribution.
+- Average daily completion.
+- Productivity streak.
+
+All calculations must use real records.
+
+Define metrics consistently and explain their meaning in the interface where necessary.
+
+## 7.6 ACTIVITY TIMELINE
+
+Track meaningful events:
+
+- Task created.
+- Task updated.
+- Task completed.
+- Task restored.
+- Task archived.
+- Priority changed.
+- Category changed.
+- Task deleted.
+
+Display events chronologically.
+
+Do not store sensitive task descriptions unnecessarily in activity records.
+
+---
+
+# 8. UNIQUE EXPERIENCE FEATURES
+
+## 8.1 COMMAND PALETTE
+
+Implement Ctrl + K.
+
+Provide searchable commands:
+
+- Create task.
+- Open Dashboard.
+- Open My Tasks.
+- Open Calendar.
+- Open Focus Mode.
+- Open Completed.
+- Open Settings.
+- Search tasks.
+- Change theme.
+
+Use keyboard navigation.
+
+## 8.2 KEYBOARD SHORTCUTS
+
+| Shortcut | Action |
+|---|---|
+| N | Create task |
+| / | Open search |
+| Ctrl + K | Command palette |
+| Esc | Close active modal |
+| Ctrl + Enter | Save task |
+| ? | Display shortcut reference |
+
+Shortcuts must not interfere with normal typing inside input fields or text areas.
+
+Support appropriate platform differences between Windows/Linux and macOS.
+
+## 8.3 SMART QUICK ADD
+
+Provide a fast task creation interface.
+
+Support rule-based parsing of simple inputs.
+
+Example:
+
+"Complete DBMS assignment tomorrow at 6 PM #College !High"
+
+Interpret:
+
+Title: Complete DBMS assignment.
+
+Date: Tomorrow.
+
+Time: 6 PM.
+
+Category: College.
+
+Priority: High.
+
+The parser should use deterministic rules and provide a preview before saving.
+
+Do not introduce an external AI dependency.
+
+## 8.4 PROGRESS STREAK
+
+Track consecutive local calendar days on which the user completes at least one task.
+
+Handle timezone changes and day boundaries consistently.
+
+Do not manipulate streak data to create misleading statistics.
+
+---
+
+# 9. UI/UX DESIGN SYSTEM
+
+## Design concept: EDITORIAL PRODUCTIVITY
+
+Develop a distinctive visual identity for TASKFLOW.
+
+The application should feel like a premium productivity instrument.
+
+It should combine:
+
+- Editorial typography.
+- Minimalist composition.
+- Strong visual hierarchy.
+- Controlled contrast.
+- Precise spacing.
+- Refined interactions.
+- Sophisticated information visualization.
+
+Do not imitate a generic dashboard template.
+
+Do not reproduce the same card composition across every screen.
+
+Give each screen a layout appropriate to its purpose.
+
+## 9.1 Initial color direction
+
+Use this as the starting design palette.
+
+| Element | HEX |
+|---|---|
+| Main background | #101210 |
+| Secondary background | #171A17 |
+| Elevated surface | #1E221E |
+| Primary text | #F2F2E9 |
+| Secondary text | #A1A69D |
+| Muted text | #70776E |
+| Accent electric lime | #C6F36B |
+| Success | #83C995 |
+| Warning | #E7B96A |
+| Danger | #E77F79 |
+| Borders | #30362F |
+
+These values should be refined for visual harmony and accessibility.
+
+Create a complete light-theme counterpart.
+
+Use semantic CSS variables instead of hardcoding colors throughout components.
+
+## 9.2 Typography
+
+Select a sophisticated typography combination.
+
+Consider:
+
+- A distinctive display font for major headings.
+- A highly readable sans-serif for interface text.
+- Monospaced typography for selected numerical information and timer elements.
+
+Maintain consistent type scales.
+
+Avoid excessive font weights and unnecessary uppercase text.
+
+## 9.3 Layout
+
+Desktop:
+
+- Compact sidebar.
+- Main workspace.
+- Contextual information panels where appropriate.
+
+Tablet:
+
+- Collapsible navigation.
+- Adaptable content layout.
+
+Mobile:
+
+- Compact navigation.
+- Touch-friendly controls.
+- Optimized task creation.
+- Responsive calendar.
+- No horizontal overflow.
+
+## 9.4 Interaction design
+
+Implement:
+
+- Subtle page transitions.
+- Task completion feedback.
+- Modal transitions.
+- Hover states.
+- Focus indicators.
+- Button feedback.
+- Loading skeletons.
+- Progress animations.
+- Drag-and-drop feedback.
+
+Respect reduced-motion preferences.
+
+Animations must be meaningful and lightweight.
+
+## 9.5 Design quality restrictions
+
+Avoid:
+
+- Generic purple-blue gradients.
+- Excessive glassmorphism.
+- Repetitive statistic cards.
+- Oversized empty sections.
+- Unnecessary illustrations.
+- Random decorative icons.
+- Excessive rounded containers.
+- Overloaded dashboards.
+- Unnecessary animation.
+
+Create original visual compositions.
+
+---
+
+# 10. DATABASE ARCHITECTURE
+
+Use Supabase PostgreSQL.
+
+Create a normalized relational database.
+
+Recommended tables:
+
+## 10.1 tasks
+
+Stores task information.
+
+## 10.2 categories
+
+Stores user-specific categories.
+
+## 10.3 tags
+
+Stores user-specific tags.
+
+## 10.4 task_tags
+
+Maps tasks to multiple tags.
+
+## 10.5 subtasks
+
+Stores child tasks.
+
+## 10.6 recurring_rules
+
+Stores recurrence configuration.
+
+## 10.7 focus_sessions
+
+Stores focus and Pomodoro history.
+
+## 10.8 activity_logs
+
+Stores task-related activities.
+
+## 10.9 user_preferences
+
+Stores interface and productivity settings.
+
+Additional tables may be introduced only when justified by the actual data model.
+
+### Database requirements
+
+- UUID primary keys.
+- Foreign key constraints.
+- Appropriate indexes.
+- NOT NULL constraints.
+- Check constraints.
+- Ownership relationships.
+- Timestamps.
+- Appropriate deletion behavior.
+- Referential integrity.
+- Efficient queries.
+
+Use database migrations or organized SQL schema files.
+
+Do not rely on manually creating tables without preserving the schema in the project.
+
+## 10.10 Important relationships
+
+- One user can own multiple tasks.
+- One user can own multiple categories.
+- One user can own multiple tags.
+- One category can contain multiple tasks.
+- One task can have multiple subtasks.
+- One task can have multiple tags.
+- One user can have multiple focus sessions.
+- One task can have multiple activity records.
+
+Allow tasks without categories.
+
+Use a single primary category per task.
+
+Completed tasks remain editable.
+
+Archived tasks remain restorable.
+
+Deleted tasks use soft deletion until permanent removal.
+
+Subtasks must not be accessible independently of their parent task's ownership.
+
+---
+
+# 11. BACKEND ARCHITECTURE
+
+Use Node.js with Express.js.
+
+Maintain strict separation of responsibilities.
+
+Recommended structure:
+
+server/
+  src/
+    config/
+    controllers/
+    routes/
+    services/
+    middleware/
+    validators/
+    repositories/
+    utils/
+    jobs/
+    app.js
+    server.js
+
+  database/
+    migrations/
+
+  tests/
+
+  package.json
+  .env.example
+
+Responsibilities:
+
+### Routes
+
+Define REST endpoints.
+
+### Controllers
+
+Handle HTTP requests and responses.
+
+### Services
+
+Contain business logic.
+
+### Repositories
+
+Handle database queries.
+
+### Middleware
+
+Handle authentication, validation, authorization, and errors.
+
+### Validators
+
+Validate incoming data.
+
+### Jobs
+
+Handle scheduled operations such as recurring task generation where necessary.
+
+Do not put all backend functionality inside one large server.js file.
+
+---
+
+# 12. REST API DESIGN
+
+Implement REST endpoints.
+
+## Tasks
+
+POST /api/tasks
+
+GET /api/tasks
+
+GET /api/tasks/:id
+
+PUT /api/tasks/:id
+
+DELETE /api/tasks/:id
+
+PATCH /api/tasks/:id/status
+
+PATCH /api/tasks/:id/priority
+
+PATCH /api/tasks/:id/archive
+
+PATCH /api/tasks/:id/restore
+
+POST /api/tasks/:id/duplicate
+
+POST /api/tasks/bulk
+
+## Categories
+
+GET /api/categories
+
+POST /api/categories
+
+PUT /api/categories/:id
+
+DELETE /api/categories/:id
+
+## Tags
+
+GET /api/tags
+
+POST /api/tags
+
+PUT /api/tags/:id
+
+DELETE /api/tags/:id
+
+## Subtasks
+
+GET /api/tasks/:taskId/subtasks
+
+POST /api/tasks/:taskId/subtasks
+
+PUT /api/subtasks/:id
+
+DELETE /api/subtasks/:id
+
+## Dashboard
+
+GET /api/dashboard/stats
+
+GET /api/dashboard/activity
+
+GET /api/dashboard/briefing
+
+## Focus sessions
+
+POST /api/focus-sessions
+
+GET /api/focus-sessions
+
+GET /api/focus-sessions/stats
+
+## Analytics
+
+GET /api/analytics/daily
+
+GET /api/analytics/weekly
+
+GET /api/analytics/monthly
+
+## Preferences
+
+GET /api/preferences
+
+PUT /api/preferences
+
+## Data management
+
+GET /api/export/tasks
+
+GET /api/export/workspace
+
+Implement additional endpoints for calendar queries, recurring tasks, trash, and restoration where necessary.
+
+Use consistent response formats.
+
+Example:
+
+{
+  "success": true,
+  "message": "Task created successfully",
+  "data": {}
+}
+
+Error responses must provide useful messages without exposing sensitive internal details.
+
+---
+
+# 13. SECURITY ARCHITECTURE
+
+Security is mandatory.
+
+## Authentication
+
+Use Supabase Anonymous Authentication.
+
+The frontend must obtain the anonymous session automatically.
+
+Pass the user's access token to the Node.js API using the Authorization Bearer header.
+
+The backend must validate the token before processing protected requests.
+
+Do not trust user IDs supplied directly in request bodies.
+
+Derive ownership from the verified authenticated user.
+
+## Supabase RLS
+
+Enable RLS on all user-owned tables.
+
+Policies must ensure:
+
+- Users can only read their records.
+- Users can only create records for themselves.
+- Users can only modify their own records.
+- Users cannot access another user's records.
+- Subtasks inherit parent-task ownership.
+- Related category and tag relationships respect ownership.
+
+Test RLS independently.
+
+## Credential management
+
+Never expose:
+
+- Supabase service-role key.
+- Database passwords.
+- Private API keys.
+- Backend secrets.
+
+Use environment variables.
+
+The Supabase anonymous/publishable key is not equivalent to the service-role key, but it must still be protected by correctly configured RLS.
+
+Use user-scoped database access for normal operations.
+
+Do not use privileged service-role access as a shortcut around authorization.
+
+## Additional security
+
+Implement:
+
+- Input validation.
+- Output encoding.
+- Protection against SQL injection.
+- XSS protection.
+- Appropriate CORS.
+- Rate limiting.
+- Secure HTTP headers.
+- Request size limits.
+- Secure error handling.
+- Ownership verification.
+- Safe file handling if file uploads are introduced.
+
+Do not implement unrestricted database policies.
+
+---
+
+# 14. FRONTEND ARCHITECTURE
+
+Use a modular React architecture.
+
+Suggested structure:
+
+client/
+  src/
+    components/
+      common/
+      layout/
+      tasks/
+      dashboard/
+      calendar/
+      focus/
+      analytics/
+
+    pages/
+      Dashboard/
+      MyTasks/
+      Today/
+      Upcoming/
+      Completed/
+      Important/
+      Overdue/
+      Categories/
+      Calendar/
+      Focus/
+      Analytics/
+      Archive/
+      Trash/
+      Settings/
+
+    context/
+    hooks/
+    services/
+    utils/
+    styles/
+    assets/
+    App.jsx
+    main.jsx
+
+Use:
+
+- Reusable components.
+- Centralized API services.
+- Consistent state management.
+- Shared validation utilities.
+- Modular CSS.
+- Appropriate React hooks.
+
+Avoid unnecessarily large components.
+
+Avoid duplicating business logic across screens.
+
+Use React Context where global state is genuinely necessary.
+
+Do not introduce Redux unless the actual application complexity justifies it.
+
+---
+
+# 15. DATA FLOW
+
+Maintain this architecture:
+
+USER
+  |
+  v
+REACT FRONTEND
+  |
+  | REST API + Bearer Token
+  v
+NODE.JS / EXPRESS
+  |
+  | Token Validation
+  | Request Validation
+  | Business Logic
+  | Authorization
+  v
+SUPABASE CLIENT
+  |
+  | User-scoped database access
+  v
+SUPABASE POSTGRESQL
+  |
+  v
+DATABASE RESPONSE
+  |
+  v
+NODE.JS API
+  |
+  v
+REACT STATE UPDATE
+  |
+  v
+UPDATED USER INTERFACE
+
+The React application may use Supabase Auth functionality to establish and maintain the anonymous session.
+
+Normal application data operations must use the Node.js REST API.
+
+Do not bypass backend business logic by implementing privileged database operations directly in frontend components.
+
+---
+
+# 16. ERROR HANDLING AND RELIABILITY
+
+Implement comprehensive error handling.
+
+Cover:
+
+- Network failures.
+- Supabase connection failures.
+- Invalid requests.
+- Unauthorized requests.
+- Missing records.
+- Duplicate submissions.
+- Database constraint violations.
+- Failed updates.
+- Failed deletions.
+- Invalid dates.
+- Timer interruptions.
+
+Every screen must support:
+
+1. Loading state.
+2. Empty state.
+3. Success feedback.
+4. Error state.
+
+Use optimistic UI updates only where rollback is implemented.
+
+Never show success when a database operation fails.
+
+Prevent accidental duplicate task submissions.
+
+Provide undo for appropriate actions.
+
+---
+
+# 17. PERFORMANCE REQUIREMENTS
+
+Optimize the application for real-world use.
+
+Requirements:
+
+- Debounced search.
+- Pagination for large task collections.
+- Efficient PostgreSQL queries.
+- Appropriate indexes.
+- Avoid unnecessary React renders.
+- Lazy-load suitable screens.
+- Avoid oversized dependencies.
+- Optimize charts.
+- Avoid excessive animations.
+- Prevent duplicate API requests.
+- Handle asynchronous operations correctly.
+
+Do not sacrifice maintainability for premature optimization.
+
+---
+
+# 18. RESPONSIVE DESIGN
+
+Support:
+
+- Desktop.
+- Laptop.
+- Tablet.
+- Mobile.
+
+Desktop is the primary productivity environment.
+
+However, mobile must remain fully usable.
+
+Test:
+
+- Sidebar navigation.
+- Task creation.
+- Task editing.
+- Calendar interactions.
+- Focus Mode.
+- Search.
+- Filters.
+- Settings.
+- Dialogs and modals.
+
+Prevent horizontal overflow.
+
+Use touch-friendly controls.
+
+---
+
+# 19. ACCESSIBILITY
+
+Implement:
+
+- Semantic HTML.
+- Keyboard navigation.
+- Visible focus indicators.
+- Appropriate ARIA labels.
+- Accessible modal behavior.
+- Sufficient color contrast.
+- Screen-reader-friendly controls.
+- Reduced-motion support.
+- Accessible form validation.
+
+Do not communicate task status through color alone.
+
+---
+
+# 20. TESTING REQUIREMENTS
+
+Test the complete application.
+
+## Frontend tests
+
+- Component rendering.
+- Task creation.
+- Task editing.
+- Task deletion.
+- Search.
+- Filtering.
+- Sorting.
+- Keyboard shortcuts.
+- Responsive layouts.
+
+## Backend tests
+
+- REST endpoint functionality.
+- Input validation.
+- Authorization.
+- Error handling.
+- Bulk operations.
+
+## Database tests
+
+- Table relationships.
+- Constraints.
+- RLS policies.
+- Ownership isolation.
+- Soft deletion.
+- Restoration.
+- Cascading behavior.
+
+## Workflow tests
+
+Test complete user journeys.
+
+Example:
+
+1. Open TASKFLOW.
+2. Initialize anonymous workspace.
+3. Create a category.
+4. Create a task.
+5. Assign a priority.
+6. Set a deadline.
+7. Create subtasks.
+8. Complete one subtask.
+9. Edit the task.
+10. Archive the task.
+11. Restore it.
+12. Complete the task.
+13. Verify dashboard statistics.
+
+Also test focus sessions, recurring tasks, analytics, and export functionality.
+
+Do not claim that a feature works unless it has been tested.
+
+---
+
+# 21. DEVELOPMENT WORKFLOW
+
+Follow this development sequence.
+
+PHASE 1 — FOUNDATION
+
+- Initialize React.
+- Initialize Node.js.
+- Configure Express.
+- Configure Supabase.
+- Establish anonymous authentication.
+- Create database schema.
+- Configure RLS.
+- Establish REST API architecture.
+
+PHASE 2 — DESIGN SYSTEM
+
+- Establish typography.
+- Define color variables.
+- Build application layout.
+- Build navigation.
+- Create reusable UI components.
+- Implement responsive behavior.
+
+PHASE 3 — CORE TASK MANAGEMENT
+
+- CRUD.
+- Categories.
+- Priorities.
+- Statuses.
+- Search.
+- Filtering.
+- Sorting.
+- Subtasks.
+- Tags.
+
+PHASE 4 — ORGANIZATION
+
+- Today.
+- Upcoming.
+- Completed.
+- Important.
+- Overdue.
+- Archive.
+- Trash.
+- Bulk operations.
+
+PHASE 5 — DASHBOARD AND CALENDAR
+
+- Dashboard statistics.
+- Daily briefing.
+- Calendar.
+- Activity timeline.
+
+PHASE 6 — PRODUCTIVITY
+
+- Focus Mode.
+- Pomodoro.
+- Session history.
+- Daily progress.
+- Analytics.
+- Streaks.
+
+PHASE 7 — ADVANCED EXPERIENCE
+
+- Command palette.
+- Keyboard shortcuts.
+- Smart Quick Add.
+- Drag-and-drop.
+- Data export.
+- Theme customization.
+
+PHASE 8 — QUALITY ASSURANCE
+
+- Functional testing.
+- Database testing.
+- Security testing.
+- Responsive testing.
+- Performance optimization.
+- Bug fixing.
+
+---
+
+# 22. DEPLOYMENT REQUIREMENTS
+
+Prepare the project for deployment.
+
+Include:
+
+- Production environment configuration.
+- Environment variable documentation.
+- Supabase production configuration.
+- Database migration instructions.
+- Frontend deployment instructions.
+- Backend deployment instructions.
+- HTTPS configuration.
+- CORS configuration.
+- Health-check endpoint.
+- Logging strategy.
+- Backup considerations.
+
+Do not hardcode localhost URLs throughout the application.
+
+Use configurable frontend and backend API base URLs.
+
+Provide a complete README containing setup and execution instructions.
+
+Include an .env.example file without actual secrets.
+
+---
+
+# 23. QUALITY CONTROL CYCLE
+
+Throughout development, follow:
+
+PLAN
+  |
+  v
+BUILD
+  |
+  v
+INSPECT
+  |
+  v
+TEST
+  |
+  v
+IDENTIFY PROBLEMS
+  |
+  v
+FIX
+  |
+  v
+RETEST
+  |
+  v
+IMPROVE
+
+Evaluate the application from six perspectives.
+
+### Software Engineer
+
+Is the code modular, maintainable, and logically structured?
+
+### UI/UX Designer
+
+Is the interface visually distinctive, intuitive, and consistent?
+
+### Database Architect
+
+Are the relationships, queries, and constraints appropriate?
+
+### Security Engineer
+
+Are authentication, authorization, and RLS correctly implemented?
+
+### QA Engineer
+
+Do the actual user workflows work correctly?
+
+### End User
+
+Is the application genuinely useful, understandable, and efficient?
+
+Do not hide errors behind decorative UI.
+
+Do not replace missing functionality with mock data.
+
+Do not silently remove difficult features.
+
+If a feature cannot be implemented properly, explain the limitation.
+
+---
+
+# 24. FINAL ACCEPTANCE CRITERIA
+
+TASKFLOW will be considered ready only when:
+
+1. The application opens directly into its workspace.
+2. No login or registration screen exists.
+3. Anonymous authentication works correctly.
+4. Users have independent workspaces.
+5. RLS protects user data.
+6. All task CRUD operations work.
+7. Categories work.
+8. Subtasks work.
+9. Tags work.
+10. Search works.
+11. Combined filtering works.
+12. Sorting works.
+13. Bulk operations work.
+14. Calendar functionality works.
+15. Dashboard statistics reflect actual data.
+16. Archive and restoration work.
+17. Recently Deleted works.
+18. Focus Mode works.
+19. Pomodoro sessions persist correctly.
+20. Productivity analytics use real records.
+21. Keyboard shortcuts work.
+22. Smart Quick Add parses supported inputs correctly.
+23. Preferences persist.
+24. Data export works.
+25. Dark and light themes work.
+26. The application is responsive.
+27. Errors are handled correctly.
+28. No privileged credentials are exposed.
+29. All major workflows have been tested.
+30. The codebase is documented and maintainable.
+
+---
+
+# 25. FINAL INSTRUCTIONS TO GOOGLE AI STUDIO
+
+Before writing implementation code, inspect the entire specification.
+
+Understand the relationships between the features.
+
+Establish the architecture and implementation plan.
+
+Do not start by generating a visually attractive dashboard with fake functionality.
+
+Build the actual application.
+
+Prioritize:
+
+1. Reliable architecture.
+2. Secure data handling.
+3. Complete CRUD functionality.
+4. Distinctive UI/UX.
+5. Excellent task organization.
+6. Productivity functionality.
+7. Responsive behavior.
+8. Performance.
+9. Maintainability.
+
+Make independent design decisions where the specification provides creative freedom.
+
+Do not ask unnecessary questions about decisions already finalized in this document.
+
+Do not silently change technologies.
+
+Do not introduce conventional authentication screens.
+
+Do not remove approved functionality.
+
+Do not claim incomplete functionality is finished.
+
+If implementation must be divided into multiple stages because of the development environment's limitations, preserve the complete architecture and feature requirements. Maintain a clear implementation checklist and continue from the last verified stage.
+
+At the end, provide:
+
+- Completed feature report.
+- Project structure.
+- Database schema.
+- RLS policies.
+- API documentation.
+- Environment configuration instructions.
+- Setup instructions.
+- Testing results.
+- Known limitations.
+- Remaining implementation tasks.
+
+The ultimate objective is to deliver TASKFLOW as a distinctive, reliable, secure, fully functional personal productivity application.
+
+**Build a real productivity product, not another generic TODO dashboard.**
